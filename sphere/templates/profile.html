@@ -1,0 +1,334 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectSphere - Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--primary-color);
+            padding: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            animation: slideIn 0.5s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item:hover {
+            background-color: white;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #357abd;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: slideIn 0.5s ease 0.4s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .profile-info {
+                padding: 1rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-links {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 0.5rem;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            }
+        }
+        .profile-img {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-globe"></i>
+                ConnectSphere
+            </a>
+
+    <div class="container">
+        <div class="profile-header">
+            {% if profile_picture %}
+    <img src="{{ profile_picture }}" alt="Profile Picture" width="100" class="profile-img">
+{% else %}
+    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" width="100">
+{% endif %}
+
+            <h2>{{ user.username }}</h2>
+            <p class="text-muted">@{{ user.username }}</p>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-item">
+                <span><i class="fas fa-at"></i> Username</span>
+                <span>{{ user.username }}</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fas fa-envelope"></i> Email</span>
+                <span>{{ user.email }}</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fas fa-envelope"></i> Phone</span>
+                <span>{{ user.phone_number }}</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fas fa-envelope"></i> Address</span>
+                <span>{{ user.address }}</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fas fa-envelope"></i> Bio</span>
+                <span>{{ user.bio }}</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="{% url 'profile_update' %}" class="btn">
+                <i class="fas fa-edit"></i> Update Profile
+            </a>
+            <a href="{% url 'homepage' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+const profilePic = document.getElementById('profile-picture');
+
+window.onload = function () {
+    const savedPhoto = sessionStorage.getItem('profile_photo');
+    if (savedPhoto) {
+        profilePic.src = savedPhoto;
+    }
+};
+
+profilePic.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imageSrc = e.target.result;
+
+                profilePic.src = imageSrc;
+
+                sessionStorage.setItem('profile_photo', imageSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    input.click();
+});
+
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.profile-info, .button-group');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+
+        if (elementTop < window.innerHeight && elementBottom > 0) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+            element.classList.add('animated');
+        }
+    });
+}
+
+window.addEventListener('scroll', animateOnScroll);
+animateOnScroll();
+
+function logout() {
+    sessionStorage.removeItem('profile_photo');
+    window.location.href = '/login'; 
+}
+    </script>
+</body>
+</html>

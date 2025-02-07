@@ -1,0 +1,357 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectSphere</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #5dade2;
+            --background-color: #f0f2f5;
+            --text-color: #2c3e50;
+            --card-background: #ffffff;
+            --hover-color: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Animation Keyframes */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post-container {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease;
+            transition: transform 0.3s ease;
+        }
+
+        .post-container:hover {
+            transform: scale(1.02);
+        }
+
+        .post-creation {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+        .post-creation textarea {
+            width: 100%;
+            border: 2px solid #e0e4e8;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 16px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .post-creation textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .post-creation button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .post-creation button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .post-header img {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--primary-color);
+            object-fit: cover; 
+            transition: transform 0.3s ease;
+        }
+        .comment img {
+            width: 30px;  
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .post-header img:hover {
+            transform: rotate(360deg);
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f1f1;
+        }
+
+        .like-button, .comment-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .like-button:hover, .comment-button:hover {
+            color: var(--hover-color);
+            transform: scale(1.1);
+        }
+        .comment-section {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, display 0.3s ease;
+        }
+
+        .comment-section.active {
+            display: block;
+            max-height: 500px; 
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <!-- <img src="/static/images/bbb.png" alt="ConnectSphere Logo"> -->
+            <img src="https://img.freepik.com/free-psd/red-spheres-connected-by-metallic-frame-network-structure-design_84443-43814.jpg?t=st=1738777360~exp=1738780960~hmac=5c637e97cd65e4e6538eba5b0e9c21742d41ebd409c26a3507bc5dcb23c248c2&w=740" alt="Network Sphere">
+
+            ConnectSphere
+        </div>
+        <div class="nav-links">
+            <a href="/homepage" onclick="showHome()"><i class="fas fa-home"></i> Home</a>
+            <a href="/profile" onclick="showProfile()"><i class="fas fa-user"></i> Profile</a>
+            <a href="/messages" onclick="showNotifications()"><i class="fas fa-envelope"></i> Message</a>
+            <a href="/update_password" onclick="showPassword()"><i class="fas fa-eye"></i> Password</a>
+            <a href="/logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="post-creation">
+            <form method="POST">
+                {% csrf_token %}
+                <textarea name="content" placeholder="What's on your mind?" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+        {% for post in posts %}
+        <div class="post-container">
+            <div class="post-header">
+                {% if post.user.profilepic %}
+                <img src="{{ post.user.profilepic.url }}" alt="Profile Picture" class="profile-img">
+                {% else %}
+                <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" width="100">
+                {% endif %}
+                <div>
+                    <strong>{{ post.user.name }}</strong><br>
+                    <small>{{ post.created_at }}</small>
+                </div>
+            </div>
+            
+            <p>{{ post.content }}</p>
+            
+            <div class="post-actions">
+                <button class="like-button" onclick="likePost({{ post.id }})">
+                    <i class="fas fa-heart"></i> Like ({{ post.likes_count }})
+                </button>
+                <button class="comment-button" onclick="toggleComments({{ post.id }})">
+                    <i class="fas fa-comment"></i> Comments
+                </button>
+            </div>
+            
+            <div id="comment-section-{{ post.id }}" class="comment-section">
+                {% for comment in post.comments %}
+                <div class="comment">
+                    {% if post.user.profilepic %}
+                    <img src="{{ post.user.profilepic.url }}" alt="Profile Picture" class="profile-img">
+                    {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" width="100">
+                    {% endif %}
+    
+                    <p><strong>{{ comment.user.name }}:</strong> {{ comment.content }}</p>
+                </div>
+                {% endfor %}
+                
+                <div class="comment-input">
+                    <input type="text" id="comment-input-{{ post.id }}" placeholder="Write a comment..." required>
+                    <button onclick="addComment({{ post.id }})">Send</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+
+        function toggleComments(postId) {
+            const commentSection = document.getElementById(`comment-section-${postId}`);
+            commentSection.classList.toggle('active');
+        }
+
+        function likePost(postId) {
+            fetch("", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `csrfmiddlewaretoken=${getCSRFToken()}&post_id=${postId}&like=1`
+            }).then(() => window.location.reload());
+        }
+
+        function addComment(postId) {
+            let commentInput = document.getElementById(`comment-input-${postId}`);
+            let commentText = commentInput.value.trim();
+            if (commentText) {
+                fetch("", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `csrfmiddlewaretoken=${getCSRFToken()}&post_id=${postId}&comment_content=${commentText}`
+                }).then(() => window.location.reload());
+            }
+        }
+
+        function showHome() {
+            alert('Home page');
+        }
+
+        function showProfile() {
+            alert('Profile page');
+        }
+
+        function showNotifications() {
+            alert('Message');
+        }
+        function showPassword() {
+            alert('Update Password');
+        }
+
+
+        function logout() {
+            alert('Logout');
+        }
+    </script>
+</body>
+</html>

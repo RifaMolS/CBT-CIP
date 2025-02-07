@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <style>
+        :root {
+            --primary-color: #5c67f2;
+            --primary-dark: #4a54e1;
+            --accent-color: #f2994a;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+            --input-background: #f9f9f9;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        /* Profile Container */
+        .profile-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.1),
+                0 6px 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 500px;
+            padding: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, var(--accent-color) 0%, transparent 60%);
+            opacity: 0.1;
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .back-button:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .profile-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+        }
+
+        .profile-header p {
+            color: #777;
+            margin-top: 10px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.3s; }
+        .form-group:nth-child(3) { animation-delay: 0.4s; }
+        .form-group:nth-child(4) { animation-delay: 0.5s; }
+        .form-group:nth-child(5) { animation-delay: 0.6s; }
+        .form-group:nth-child(6) { animation-delay: 0.7s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--input-background);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(92, 103, 242, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #aaa;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Update Button */
+        .update-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .update-button:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 8px 15px rgba(74, 84, 225, 0.2);
+        }
+
+        .update-button:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        .update-button .button-overlay {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .update-button:hover .button-overlay {
+            left: 100%;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: #ff4d4d;
+            text-align: center;
+            margin-top: 1rem;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 1.5rem;
+                margin: 20px;
+            }
+
+            .profile-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                font-size: 16px;
+            }
+
+            .back-button i {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Back Button -->
+        <a href="{% url 'profile' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+
+        <div class="profile-header">
+            <h2>Update Your Profile</h2>
+            <p>Keep your information up to date</p>
+        </div>
+
+        <!-- Update Profile Form -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username"><i class="fas fa-user-circle"></i> Username</label>
+                <input type="text" name="username" value="{{ user.username }}" placeholder="Choose a unique username">
+            </div>
+
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" name="email" value="{{ user.email }}" placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+                <label for="phone_number"><i class="fas fa-phone"></i> Phone Number</label>
+                <input type="text" name="phone_number" value="{{ user.phone_number }}" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="address"><i class="fas fa-map-marker-alt"></i> Address</label>
+                <textarea name="address" placeholder="Enter your full address">{{ user.address }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="profilepic"><i class="fas fa-map-marker-alt"></i> Profile Image</label>
+                <input type="file" name="profilepic" />
+            </div>
+
+            <div class="form-group">
+                <label for="bio"><i class="fas fa-info-circle"></i> Bio</label>
+                <textarea name="bio" placeholder="Tell us a bit about yourself">{{ user.bio }}</textarea>
+            </div>
+
+            {% if error %}
+                <div class="error-message">{{ error }}</div>
+            {% endif %}
+
+            <button type="submit" class="update-button">
+                Update Profile
+                <span class="button-overlay"></span>
+            </button>
+        </form>
+    </div>
+</body>
+</html>

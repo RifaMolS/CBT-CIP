@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        header a:hover {
+            color: #000;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            animation: fadeInDown 2s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            animation: fadeInUp 2s;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #fff;
+            color: #000;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            animation: bounceIn 2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero .cta:hover {
+            background: #000;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: zoomIn 1.5s;
+        }
+
+        .feature h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .feature p {
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#">ConnectSphere</a>
+        </div>
+        <nav>
+            <a href="/about">About</a>
+            <a href="#features">Features</a>
+            <a href="/contact">Contact</a>
+            <a href="{% url 'register' %}">Register</a>
+
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 class="animate__animated animate__fadeInDown">Welcome to ConnectSphere</h1>
+        <p class="animate__animated animate__fadeInUp">Connecting the world, one step at a time.</p>
+        <a href="#features" class="cta animate__animated animate__bounceIn">Discover More</a>
+    </section>
+
+    <section id="features" class="features">
+        <div class="feature animate__animated animate__zoomIn">
+            <h3>Interactive Design</h3>
+            <p>Experience a sleek and intuitive interface built for everyone.</p>
+        </div>
+        <div class="feature animate__animated animate__zoomIn">
+            <h3>Seamless Connectivity</h3>
+            <p>Stay connected with friends, family, and professionals worldwide.</p>
+        </div>
+        <div class="feature animate__animated animate__zoomIn">
+            <h3>Reliable Performance</h3>
+            <p>Enjoy fast and reliable services anytime, anywhere.</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 ConnectSphere. All rights reserved.
+    </footer>
+</body>
+</html>
